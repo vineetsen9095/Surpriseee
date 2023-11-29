@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Day Greeting</title>
+    <style>
+        body {
+            background: url('https://wallpapers.com/images/featured/xdjulyxxrz3yeq4o.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            /* White text color */
+        }
+
+        #message {
+            text-align: center;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            /* White color with 90% opacity */
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.3);
+            /* Semi-transparent black background */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100vw;
+            /* Adjusted width for better readability */
+            max-width: 500px;
+            /* Limit maximum width for larger screens */
+        }
+
+        #text {
+            margin-bottom: 20px;
+            font-size: 2em;
+            /* Larger font size */
+            font-weight: bold;
+            color: #c94c17;
+            /* Orange color */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            /* Text shadow for emphasis */
+        }
+
+        #image {
+            width: 100%;
+            height: auto;
+            /* Ensure the image maintains its aspect ratio */
+            max-height: 100vh;
+            /* Limit the height to 70% of the viewport height */
+            object-fit: cover;
+            border-radius: 8px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="message">
+        <p id="text"></p>
+        <img id="image" src="" alt="Special Day Image">
+    </div>
+
+    <script>
+        const textElement = document.getElementById('text');
+        const imageElement = document.getElementById('image');
+        const messages = [
+            { type: 'text', content: "Hi!" },
+            { type: 'text', content: "It is the Special Day in Your Life..😊" },
+            { type: 'text', content: "On Your Special Day .." },
+            { type: 'text', content: "I wish you both" },
+            { type: 'text', content: "a lifetime Filled with Love," },
+            { type: 'text', content: "Joy, and Togetherness" },
+            { type: 'text', content: "🎊🎉✨Happy Anniversary🎊🎉✨" },
+            { type: 'text', content: "Dear Bhaiya & Bhabhi  😊 " },
+            { type: 'image', src: "https://drive.google.com/uc?id=17nM87nSHqSKg4BaYh_pGk2hPW4-jLl1e" },
+            { type: 'text', content: "Creator: Vineet" }
+        ];
+
+        let currentIndex = 0;
+        let currentCharacterIndex = 0;
+
+        function displayMessage() {
+            const currentMessage = messages[currentIndex];
+
+            if (currentMessage.type === 'text') {
+                const currentText = currentMessage.content.substring(0, currentCharacterIndex);
+                textElement.innerHTML = currentText;
+            } else if (currentMessage.type === 'image') {
+                imageElement.src = currentMessage.src;
+                imageElement.style.display = 'block';
+                setTimeout(clearMessage, 9000);
+                return;
+            }
+
+            currentCharacterIndex++;
+
+            if (currentCharacterIndex <= currentMessage.content.length) {
+                setTimeout(displayMessage, 100);
+            } else {
+                currentCharacterIndex = 0;
+                setTimeout(clearMessage, currentMessage.type === 'text' ? 500 : 2000);
+            }
+        }
+
+        function clearMessage() {
+            textElement.innerHTML = '';
+            imageElement.src = '';
+            imageElement.style.display = 'none';
+            currentIndex = (currentIndex + 1) % messages.length;
+            displayMessage(); // Trigger displayMessage immediately after clearing
+        }
+
+        displayMessage();
+    </script>
+</body>
+
+</html>
